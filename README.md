@@ -39,7 +39,7 @@ nano ~/scripts/autoreboot.sh
 ```
 
 ## Step 3 - Paste the script
-Paste the script in the editor, then click X, then Y, then ENTER
+Paste the script in your terminal editor (to paste in your terminal simply right-click with your mouse, do not CTRL+V). Then press CTRL+X, then Y, then ENTER
 ```bash
 #!/bin/bash
 
