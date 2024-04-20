@@ -1,14 +1,17 @@
 # Autoreboot script for Quilibrium nodes (Unix systems)
+
+> Created by **LaMAt** /// connect with me on [Farcaster](https://warpcast.com/~/invite-page/373160?id=67559391) or [Twitter](https://twitter.com/LaMat1111) /// &#x2661; [Donations](#-want-to-say-thank-you)
+
 This script automates the process of rebooting Unix-like operating systems such as Linux distributions (e.g., Ubuntu, Debian, CentOS) and BSD-based systems (e.g., FreeBSD, macOS). It's specifically built for system hosting Quilibrium nodes, running via a tmux session named *quil*.
 
 If you have installed your node via my guide [Quilibrium node autoinstaller](https://github.com/lamat1111/Quilibrium-Node-Auto-Installer), then the below script will work for you.
 
 ### What does it do?
-It detects when a system restart is required, typically after system updates, and initiates the reboot process automatically.
+The script detects when a system restart is required, typically after system updates, and initiates the reboot process automatically.
 
-The script assumes that there is a tmux session named *quil* running, and it kills it before rebooting. **You need to implement a system to restart the node automatically after any reboot.** For instance the one below (Step 1).
+The script assumes that there is a tmux session named *quil* running, and it terminates it before rebooting. **You need to implement a system to automatically restart the node after any reboot.** For instance, you can follow the steps outlined below (Step 1).
 
-The script will be executed via a cronjob (default at 2 AM CET everyday, change the cronjob settings according to your needs). The script will give a 3 minute windows to abort, in case you are working on your terminal when is executed.
+The script will be executed via a cronjob (set by default to run at 2 AM CET every day; adjust the cronjob settings according to your needs). It provides a 3-minute window to abort the reboot process in case you are working in your terminal when it is executed.
 
 ## Step 1 - Create cronjob to run the node automatically after a reboot
 You only have to run this command once. This will setup a cronjob that will create your tmux session and run the node automatically after every reboot of your server.
@@ -82,3 +85,23 @@ Paste the below cronjob, then press X, then Y, then ENTER
 0 2 * * * TZ="Europe/Amsterdam" /root/scripts/autoreboot.sh
 ```
 *The script will be executed at 2 AM CET everyday, change the cronjob settings according to your needs.*
+
+---
+
+### &#x2661; Want to say thank you?
+
+If you are happy with all this, you can buy me a cup of something with a small donation.
+<details><summary>Donate QUIL</summary>
+ 
+```
+coming soon...
+```
+</details>
+<details><summary>Donate ERC20</summary>
+ 
+```
+0x0fd383A1cfbcf4d1F493Dd71b798ebca89e8a013
+```
+Any token that lives on the Ethereum network or Layer2
+</details>
+
