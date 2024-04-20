@@ -1,7 +1,7 @@
 # Autoreboot script for Quilibrium nodes (Unix systems)
 This script automates the process of rebooting Unix-like operating systems such as Linux distributions (e.g., Ubuntu, Debian, CentOS) and BSD-based systems (e.g., FreeBSD, macOS). It's specifically built for system hosting Quilibrium nodes, running via a tmux session named *quil*.
 
-If you have installed your node via my script [Quilibrium node autoinstaller](https://github.com/lamat1111/Quilibrium-Node-Auto-Installer), then the below script will work for you.
+If you have installed your node via my guide [Quilibrium node autoinstaller](https://github.com/lamat1111/Quilibrium-Node-Auto-Installer), then the below script will work for you.
 
 ### What does it do?
 It detects when a system restart is required, typically after system updates, and initiates the reboot process automatically.
