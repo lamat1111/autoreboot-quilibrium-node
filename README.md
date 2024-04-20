@@ -6,8 +6,9 @@ If you have installed your node via my script [Quilibrium node autoinstaller](ht
 ### What does it do?
 It detects when a system restart is required, typically after system updates, and initiates the reboot process automatically.
 
-The script assumes that there is a tmux session named *quil* running, and it kills it before rebooting. **You need to implement a system to restart the node automatically after any reboot.** For instance the one below.
-The script will be executed via a cronjob (default at 2 AM UTC+1 everyday, change the cronjob settings according to your needs). The script will give a 3 minute windows to abort, in case you are working on your terminal when is executed.
+The script assumes that there is a tmux session named *quil* running, and it kills it before rebooting. **You need to implement a system to restart the node automatically after any reboot.** For instance the one below (Step 1).
+
+The script will be executed via a cronjob (default at 2 AM CET everyday, change the cronjob settings according to your needs). The script will give a 3 minute windows to abort, in case you are working on your terminal when is executed.
 
 ## Step 1 - Create cronjob to run the node automatically after a reboot
 You only have to run this command once. This will setup a cronjob that will create your tmux session and run the node automatically after every reboot of your server.
@@ -18,7 +19,6 @@ echo '@reboot sleep 10 && bash -lc "export PATH=$PATH:/usr/local/go/bin && cd ~/
 If you need to delete the crontab:<br>
 Open the crontab file for editing with <code>crontab -e</code><br>
 Locate the line corresponding to the cron job you want to delete and delete it. Press CTRL+X, then Y to save, then ENTER
-
 
 ## Step 2 - Create the autoreboot.sh file
 Create a */root/scripts* folder, then create the *autoreboot.sh* file, and open file
@@ -68,4 +68,17 @@ else
 fi
 ```
 
-## Step 4 - Paste the script
+## Step 5 - edit autoreboot.sh permissions
+Give execute permission to the owner (whcich should be "root")
+```bash
+chmod u+x ~/scripts/autoreboot.sh
+```
+## Step 6 - Add the Cronjob
+```bash
+crontab -e
+```
+Paste the below cronjob, then press X, then Y, then ENTER
+```bash
+0 2 * * * TZ="Europe/Amsterdam" /root/scripts/autoreboot.sh
+```
+*The script will be executed at 2 AM CET everyday, change the cronjob settings according to your needs.*
