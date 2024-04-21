@@ -43,8 +43,16 @@ Paste the script in your terminal editor (to paste in your terminal simply right
 ```bash
 #!/bin/bash
 
+# Log file path
+LOG_FILE="/root/scripts/autoreboot-log.txt"
+
+# Function to log reboot execution
+log_reboot() {
+    echo "System reboot executed - $(date)" >> "$LOG_FILE"
+}
+
 # Check if the "System restart required" message is present
-if [ -f /var/run/reboot-required ] && \\
+if [ -f /var/run/reboot-required ] && \
    [ $(($(date +%s) - $(stat -c %Z /var/run/reboot-required 2>/dev/null || echo 0))) -ge $((24 * 60 * 60)) ]; then
 
     # Prompt for reboot with a countdown
@@ -61,6 +69,9 @@ if [ -f /var/run/reboot-required ] && \\
     # Wait for processes to shut down gracefully
     sleep 10
 
+    # Log reboot execution
+    log_reboot
+
     # Reboot the server
     echo "Rebooting the server..."
     sudo reboot
@@ -69,7 +80,10 @@ else
     echo "No reboot required or not the scheduled time for reboot."
     exit 0
 fi
+
 ```
+>[!NOTE]
+>The script will log any successful reboot in <code>/root/scripts/autoreboot-log.txt</code>. As long as you have created the "/root/scripts" folder, you don't need to create the "log-autoreboot.txt" file, the script will create it automatically.
 
 ## Step 5 - edit autoreboot.sh permissions
 Give execute permission to the owner (which should be "root")
