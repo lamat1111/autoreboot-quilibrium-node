@@ -72,7 +72,7 @@ fi
 ```
 
 ## Step 5 - edit autoreboot.sh permissions
-Give execute permission to the owner (whcich should be "root")
+Give execute permission to the owner (which should be "root")
 ```bash
 chmod u+x ~/scripts/autoreboot.sh
 ```
