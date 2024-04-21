@@ -48,7 +48,7 @@ LOG_FILE="/root/scripts/autoreboot-log.txt"
 
 # Function to log reboot execution
 log_reboot() {
-    echo "System reboot executed - $(date)" >> "$LOG_FILE"
+    echo "System, reboot executed - $(date)" | cat - "$LOG_FILE" > temp && mv temp "$LOG_FILE"
 }
 
 # Check if the "System restart required" message is present
@@ -80,6 +80,7 @@ else
     echo "No reboot required or not the scheduled time for reboot."
     exit 0
 fi
+
 
 ```
 >[!NOTE]
