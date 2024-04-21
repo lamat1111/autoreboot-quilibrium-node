@@ -39,61 +39,10 @@ nano ~/scripts/autoreboot.sh
 ```
 
 ## Step 3 - Paste the script
+Copy the [autoreboot.sh script](https://github.com/lamat1111/autoreboot-quilibrium-node/blob/main/autoreboot).
+
 Paste the script in your terminal editor (to paste in your terminal simply right-click with your mouse, do not CTRL+V). Then press CTRL+X, then Y, then ENTER
-```bash
-#!/bin/bash
 
-# Log file path
-LOG_FILE="/root/scripts/autoreboot-log.txt"
-
-# Function to log reboot execution
-log_reboot() {
-    if echo "$(date +"%d/%m/%Y - %H:%M UTC") - System reboot executed" | cat - "$LOG_FILE" > temp && mv temp "$LOG_FILE"; then
-        echo "Reboot logged successfully."
-    else
-        echo "Failed to log reboot. Check permissions or disk space."
-        exit 1
-    fi
-}
-
-# Check if the "System restart required" message is present
-if [ -f /var/run/reboot-required ] && \
-   [ $(($(date +%s) - $(stat -c %Z /var/run/reboot-required 2>/dev/null || echo 0))) -ge $((24 * 60 * 60)) ]; then
-
-    # Prompt for reboot with a countdown
-    read -t 180 -p "Reboot required - server will reboot in 3 minutes. Press 'n' to abort. " choice
-
-    if [ "$choice" = "n" ]; then
-        echo "Reboot aborted."
-        exit 1
-    fi
-
-    # Kill the tmux session named "quil"
-    if ! tmux kill-session -t quil; then
-        echo "Failed to kill tmux session. Proceeding with reboot."
-    fi
-
-    # Wait for processes to shut down gracefully
-    sleep 10
-
-    # Log reboot execution
-    log_reboot
-
-    # Reboot the server
-    echo "Rebooting the server..."
-    if ! sudo reboot; then
-        echo "Failed to reboot the server. Please reboot manually."
-        exit 1
-    fi
-
-else
-    echo "No reboot required or not the scheduled time for reboot."
-    exit 0
-fi
-
-
-
-```
 >[!NOTE]
 >The script will log any successful reboot in <code>/root/scripts/autoreboot-log.txt</code>. As long as you have created the "/root/scripts" folder, you don't need to create the "log-autoreboot.txt" file, the script will create it automatically.
 
