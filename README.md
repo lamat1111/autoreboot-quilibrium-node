@@ -1,5 +1,8 @@
 # Autoreboot script for Quilibrium nodes (Unix systems)
 
+>[!WARNING]
+> The script runs manually but not automatically via cron. The cronjob triggers correctly, but the script doesn't execute. It's likely not a permission issue. Differences in environment or execution context between manual and cron execution might be causing the problem. I haven't had time to fully debug this yet!
+
 >[!TIP]
 >This script automates the process of rebooting Unix-like operating systems such as Linux distributions (e.g., Ubuntu, Debian, CentOS) and BSD-based systems (e.g., FreeBSD, macOS). It's specifically built for system hosting Quilibrium nodes, running via a tmux session named "quil".<br>If you have installed your node via my guide [Quilibrium node autoinstaller](https://github.com/lamat1111/Quilibrium-Node-Auto-Installer), then the below script will work for you.
 
