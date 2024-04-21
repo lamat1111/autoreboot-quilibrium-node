@@ -48,7 +48,12 @@ LOG_FILE="/root/scripts/autoreboot-log.txt"
 
 # Function to log reboot execution
 log_reboot() {
-    echo "$(date +"%d/%m/%Y - %H:%M UTC") - System reboot executed" | cat - "$LOG_FILE" > temp && mv temp "$LOG_FILE"
+    if echo "$(date +"%d/%m/%Y - %H:%M UTC") - System reboot executed" | cat - "$LOG_FILE" > temp && mv temp "$LOG_FILE"; then
+        echo "Reboot logged successfully."
+    else
+        echo "Failed to log reboot. Check permissions or disk space."
+        exit 1
+    fi
 }
 
 # Check if the "System restart required" message is present
@@ -64,7 +69,9 @@ if [ -f /var/run/reboot-required ] && \
     fi
 
     # Kill the tmux session named "quil"
-    tmux kill-session -t quil
+    if ! tmux kill-session -t quil; then
+        echo "Failed to kill tmux session. Proceeding with reboot."
+    fi
 
     # Wait for processes to shut down gracefully
     sleep 10
@@ -74,12 +81,16 @@ if [ -f /var/run/reboot-required ] && \
 
     # Reboot the server
     echo "Rebooting the server..."
-    sudo reboot
+    if ! sudo reboot; then
+        echo "Failed to reboot the server. Please reboot manually."
+        exit 1
+    fi
 
 else
     echo "No reboot required or not the scheduled time for reboot."
     exit 0
 fi
+
 
 
 ```
