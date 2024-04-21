@@ -38,8 +38,8 @@ touch ~/scripts/autoreboot.sh
 nano ~/scripts/autoreboot.sh
 ```
 
-## Step 3 - Paste the script
-Copy the [autoreboot.sh script](https://github.com/lamat1111/autoreboot-quilibrium-node/blob/main/autoreboot).
+## Step 3 - Copy/paste the script
+**Copy the [autoreboot.sh script](https://github.com/lamat1111/autoreboot-quilibrium-node/blob/main/autoreboot).**
 
 Paste the script in your terminal editor (to paste in your terminal simply right-click with your mouse, do not CTRL+V). Then press CTRL+X, then Y, then ENTER
 
