@@ -48,7 +48,7 @@ LOG_FILE="/root/scripts/autoreboot-log.txt"
 
 # Function to log reboot execution
 log_reboot() {
-    echo "$(date) - system reboot executed" | cat - "$LOG_FILE" > temp && mv temp "$LOG_FILE"
+    echo "$(date +"%d/%m/%Y - %H:%M UTC") - System reboot executed" | cat - "$LOG_FILE" > temp && mv temp "$LOG_FILE"
 }
 
 # Check if the "System restart required" message is present
